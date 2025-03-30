@@ -1,3 +1,3 @@
 Isto é um projeto de treino com API de cartas
 
-Doc API: 
+Doc API: https://deckofcardsapi.com 
