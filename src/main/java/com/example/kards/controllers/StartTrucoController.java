@@ -1,5 +1,6 @@
 package com.example.kards.controllers;
 
+import com.example.kards.domain.Deck;
 import com.example.kards.domain.StartTruco;
 import com.example.kards.services.StartTrucoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,4 +29,16 @@ public class StartTrucoController {
                 }
         }
 
+        @GetMapping("/decks")
+        public ResponseEntity<?> generateDecks(){
+                try {
+                        System.out.println("Gerando mãos...");
+                        Deck deck = startTrucoService.generateDecks(4);
+                        return ResponseEntity.ok(deck);
+                } catch (RuntimeException e) {
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+                } catch (Exception e) {
+                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro inesperado: " + e.getMessage());
+                }
+        }
 }

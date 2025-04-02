@@ -1,5 +1,6 @@
 package com.example.kards.services;
 
+import com.example.kards.domain.Deck;
 import com.example.kards.domain.StartTruco;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -40,5 +41,28 @@ public class StartTrucoService {
         }
 
         return startTruco;
+    }
+
+    @GetMapping("/decks")
+    public Deck generateDecks(int deck_quantity) throws IOException, InterruptedException {
+        uri = "/new/draw/?count="+deck_quantity;
+
+        HttpClient client = HttpClient.newHttpClient();
+
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url+uri)).build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        if (response.statusCode() != 200) {
+            throw new RuntimeException("Erro na requisição " + response.statusCode());
+        }
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Deck deck = objectMapper.readValue(response.body(), Deck.class);
+
+        if (!deck.isSuccess()){
+            throw new RuntimeException("A API retornou erro ao criar as mãos");
+        }
+
+        return deck;
     }
 }
