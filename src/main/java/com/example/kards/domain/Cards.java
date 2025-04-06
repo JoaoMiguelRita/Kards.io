@@ -4,7 +4,7 @@ public class Cards {
     private String code;
     private String image;
     private Images images;
-    private String values;
+    private String value;
     private String suit;
 
     public String getCode() {
@@ -31,13 +31,11 @@ public class Cards {
         this.images = images;
     }
 
-    public String getValues() {
-        return values;
+    public String getValue() {
+        return value;
     }
 
-    public void setValues(String values) {
-        this.values = values;
-    }
+    public void setValue(String value) { this.value = value;}
 
     public String getSuit() {
         return suit;
@@ -46,4 +44,5 @@ public class Cards {
     public void setSuit(String suit) {
         this.suit = suit;
     }
+
 }

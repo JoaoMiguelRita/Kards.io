@@ -1,10 +1,13 @@
 package com.example.kards.domain;
 
+import java.util.List;
+
 public class Deck {
 
     private boolean success;
     private String deck_id;
-    private Cards cards;
+    private List<Cards> cards;
+    private int remaining;
 
     public boolean isSuccess() {
         return success;
@@ -22,11 +25,19 @@ public class Deck {
         this.deck_id = deck_id;
     }
 
-    public Cards getCards() {
+    public List<Cards> getCards() {
         return cards;
     }
 
-    public void setCards(Cards cards) {
+    public void setCards(List<Cards> cards) {
         this.cards = cards;
+    }
+
+    public int getRemaining() {
+        return remaining;
+    }
+
+    public void setRemaining(int remaining) {
+        this.remaining = remaining;
     }
 }
